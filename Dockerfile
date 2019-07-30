@@ -1,7 +1,7 @@
 # fd's persion ubuntu dev env setup
-# version: v0.0.1
+# version: v0.0.2
 # run as:
-# docker build --tag=fdingiit/devenv:v0.0.1 - < DockerFile
+# docker build --tag=fdingiit/devenv:v0.0.2 - < DockerFile
 
 FROM ubuntu:16.04
 
@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		binutils \
 		bison \
 		build-essential \
+		ca-certificates \
 	&& rm -rf /var/lib/apt/lists/*
 
 ENV GOLANG_VERSION 1.12.7
@@ -59,3 +60,5 @@ RUN set -eux; \
 
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+RUN echo "export PATH=$PATH" >> /etc/profile
+RUN echo "export GOPATH=$GOPATH" >> /etc/profile
